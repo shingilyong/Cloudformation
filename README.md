@@ -1,4 +1,4 @@
-# Cloudformation
+# terraform 
 
 
-Cloudformation 코드 정리하기
+terraform  정리하기
