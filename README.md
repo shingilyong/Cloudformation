@@ -13,5 +13,7 @@ terraform 에러 정리
 
 2. ec2 생성 안되는 에러...
 (Error launching source instance: UnauthorizedOperation: You are not authorized to perform this operation)
->>> 기존에 사용하던 user로 ec2 생성하려고 하니 안만들어져서 새로운 iam user 다시 만들어서 administratorAccess 권한 주었다.
+> 기존에 사용하던 user로 ec2 생성하려고 하니 안만들어져서 새로운 iam user 다시 만들어서 administratorAccess 권한 주었다.
+
+3. ALB에 target group붙이는게 왜케 어렵니
 
