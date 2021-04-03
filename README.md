@@ -3,7 +3,7 @@
 Terraform 코드 정리하기
 
 
-
+#연습중이라 아직은 변수없이 하드코딩으로 작성 해보는중##
 
 --------------------------------------------------
 terraform 에러 정리
@@ -12,4 +12,6 @@ terraform 에러 정리
    unlock <lock ID> 명령어로 lock을 해제하라고 하는데 lock id가 찾아봐도 어디있는지 모르겠어서... 일단은 kill 명령어로 프로세스를 죽이고 재실행했더니 lock 뜨던 오류는 사라졌다.
 
 2. ec2 생성 안되는 에러...
-(Error launching source instance: UnauthorizedOperation: You are not authorized to perform this operatio)
+(Error launching source instance: UnauthorizedOperation: You are not authorized to perform this operation)
+> 기존에 사용하던 user로 ec2 생성하려고 하니 안만들어져서 새로운 iam user 다시 만들어서 administratorAccess 권한 주었다.
+.
