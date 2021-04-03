@@ -77,6 +77,7 @@ resource "aws_subnet" "terraform-was-2" {
     }
 }
 
+# private db subnet1 생성
 resource "aws_subnet" "terraform-db-1" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     cidr_block          = "10.0.3.0/24"
@@ -87,6 +88,7 @@ resource "aws_subnet" "terraform-db-1" {
     }
 }
 
+# private db subnet2 생성
 resource "aws_subnet" "terraform-db-2" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     cidr_block          = "10.0.13.0/24"
@@ -97,6 +99,7 @@ resource "aws_subnet" "terraform-db-2" {
     }
 }
 
+# Internet Gatewat 생성
 resource "aws_internet_gateway" "terraform_IGW" {
   vpc_id = aws_vpc.terraform_vpc.id
 
@@ -105,7 +108,7 @@ resource "aws_internet_gateway" "terraform_IGW" {
   }
 }
 
-
+# Elastic IP 생성
 resource "aws_eip" "terraform-NAT-eip" {   
     vpc      = true
     tags = {
@@ -192,7 +195,7 @@ resource "aws_route_table_association" "private-route5" {
   route_table_id = aws_route_table.terraform-private-route.id
 }
 
-
+# bastion-sg 생성
 resource "aws_security_group" "terraform-bastion-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     name                = "terraform-bastion-sg"
@@ -201,7 +204,7 @@ resource "aws_security_group" "terraform-bastion-sg" {
     }
 }
 
-
+# External-ELB-sg 생성
 resource "aws_security_group" "terraform-External-ELB-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     name                = "terraform-External-ELB-sg"
@@ -210,7 +213,7 @@ resource "aws_security_group" "terraform-External-ELB-sg" {
             }
 }
 
-
+# web-sg 생성
 resource "aws_security_group" "terraform-web-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     name                = "terraform-web-sg"
@@ -219,6 +222,7 @@ resource "aws_security_group" "terraform-web-sg" {
     }
 }
 
+# internal-ELB-sg 생성
     resource "aws_security_group" "terraform-Internal-ELB-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     name                = "terraform-Internal-ELB-sg"
@@ -227,6 +231,7 @@ resource "aws_security_group" "terraform-web-sg" {
     }
 }
 
+# was-sg 생성
     resource "aws_security_group" "terraform-was-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
     name                = "terraform-was.sg"
@@ -235,6 +240,7 @@ resource "aws_security_group" "terraform-web-sg" {
     }
 }
 
+# db-sg 생성
     resource "aws_security_group" "terraform-db-sg" {
     vpc_id              = "${aws_vpc.terraform_vpc.id}"
         name                = "terraform-db.sg"
@@ -571,7 +577,7 @@ resource "aws_alb_listener" "http" {
 
 # Internal-ELB 생성
 resource "aws_lb" "terraform-internal-elb" {
-  name               = "terraform-inxternal-elb"
+  name               = "terraform-internal-elb"
   subnets = ["${aws_subnet.terraform-was-1.id}", "${aws_subnet.terraform-was-2
 .id}"]
   security_groups    = ["${aws_security_group.terraform-Internal-ELB-sg.id}"]
@@ -579,7 +585,7 @@ resource "aws_lb" "terraform-internal-elb" {
   internal           = true 
 
   tags = {
-    Name = "terraform-ixternal-elb"
+    Name = "terraform-internal-elb"
   }
 
   }
@@ -651,3 +657,4 @@ resource "aws_db_instance" "terraform-DB" {
   db_subnet_group_name  = "terraform-subnet-group"
   vpc_security_group_ids = ["${aws_security_group.terraform-db-sg.id}"]
   multi_az             = true
+}

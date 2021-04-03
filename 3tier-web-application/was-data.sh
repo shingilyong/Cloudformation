@@ -6,6 +6,6 @@ sudo wget "https://downloads.apache.org/tomcat/tomcat-10/v10.0.4/bin/apache-tomc
 sudo tar xzf apache-tomcat-10.0.4.tar.gz
 cd apache-tomcat-10.0.4
 
-echo "was potato1" > /apache-tomcat-10.0.4/webapps/ROOT/2.jsp
+echo "was potato1" > /apache-tomcat-10.0.4/webapps/ROOT/1.jsp
 
 sudo ./bin/startup.sh
