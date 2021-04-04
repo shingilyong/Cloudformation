@@ -339,7 +339,7 @@ resource "aws_security_group_rule" "terraform-Internal-ELB-sg-role" {
     to_port             = 8080
     protocol            = "tcp"
 
-        security_group_id   = "${aws_security_group.terraform-Internal-ELB-sg.id}"
+    security_group_id   = "${aws_security_group.terraform-Internal-ELB-sg.id}"
     source_security_group_id     = "${aws_security_group.terraform-web-sg.id}"
 
 }
@@ -374,7 +374,7 @@ resource "aws_security_group_rule" "terraform-was-sg-role" {
 resource "aws_security_group_rule" "terraform-was-sg-role1" {
     type                = "ingress"
 
-        from_port           = 22
+    from_port           = 22
     to_port             = 22
     protocol            = "tcp"
     cidr_blocks                  = ["0.0.0.0/0"]
@@ -404,7 +404,7 @@ resource "aws_security_group_rule" "terraform-db-sg-role" {
     protocol            = "tcp"
     cidr_blocks         = ["0.0.0.0/0"]
 
-        security_group_id   = "${aws_security_group.terraform-db-sg.id}"
+    security_group_id   = "${aws_security_group.terraform-db-sg.id}"
 }
 
 
@@ -437,9 +437,8 @@ resource "aws_key_pair" "private_key" {
 resource "aws_instance" "terraform-bastion" {
   ami                       = "ami-081511b9e3af53902"
   instance_type             = "t2.micro"
-    subnet_id                 = "${aws_subnet.terraform-public-1.id}"
-  vpc_security_group_ids    = ["${aws_security_group.terraform-bastion-sg.id}"
-]
+  subnet_id                 = "${aws_subnet.terraform-public-1.id}"
+  vpc_security_group_ids    = ["${aws_security_group.terraform-bastion-sg.id}"]
   key_name                  = "${aws_key_pair.terraform_key.key_name}"
 
   associate_public_ip_address = true
