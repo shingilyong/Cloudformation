@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 
-# vpc 생성
+# vpc 생성 .
 resource "aws_vpc" "web_vpc" {
     cidr_block = "${var.cidr_block["cidr_vpc"]}"
     tags = {
