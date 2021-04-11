@@ -318,3 +318,26 @@ resource "aws_security_group_rule" "terraform-db-sg-role1" {
 
     security_group_id   = "${aws_security_group.terraform-db-sg.id}"
 }
+
+
+
+
+
+resource "aws_s3_bucket" "terraform-bucket" {
+  bucket = "terraform-bucket"
+  acl    = "private"
+
+  tags = {
+    Name        = "terraform-bucket"
+  }
+}
+
+
+
+resource "aws_s3_bucket_public_access_block" "example-potato" {
+  bucket = aws_s3_bucket.terraform-bucket-potato.id
+
+  block_public_acls   = false
+  block_public_policy = false
+  
+}
